@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=http://www.thymeleaf.org
+>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="./css/style-main.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="navbar-side">
+    <div class="container-side-bar">
+        <div class="container">
+            <img class="profile-img zoom" th:src="${user.imageName}" alt="Profile Pic">
+            <div class="middle">
+                <div class="text" th:text="${user.name}"></div>
+            </div>
+        </div>
+        <a class="row-full active" href="#" th:text="${user.name}"></a>
+        <a class="row-full" href="#" th:text="${user.email}"></a>
+        <a class="row-full" href="#" th:text="${user.designation}"></a>
+        <a class="row-full right" th:text="${user.designation}"></a>
+    </div>
+
+
+</div>
+<div class="main-container">
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modal-heading"><i></i></p>
+            <p id="modal-description"></p>
+            <p id="modal-link"></p>
+        </div>
+
+    </div>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <form class="d-flex expand" role="search" action="/data/downloadFile/resume" method="get">
+                <input id="searchBar" class="form-control me-3 expand" type="search"
+                       placeholder="Search anything. Example : Education, Work Experience etc." aria-label="Search">
+                <button class="btn btn-outline-warning" type="submit" onClick="searchModals(event)">Search</button>
+                <button class="btn  btn-outline-Primary btn-download" type="submit" ><i class="fa fa-download"></i> Resume</button>
+            </form>
+        </div>
+    </nav>
+    <tr th:each="modal: ${modals}">
+        <div class="card-container" th:tags="${modal.tags}" >
+            <div class="card card-box zoom" style="width: 18rem;">
+                <img th:src="${modal.imageName}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${modal.name}" style="color:darkgrey"></h5>
+                    <p class="card-text" th:text="${modal.description}"></p>
+                    <a th:onclick="modalDisplay([[${modal.name}]], [[${modal.description}]],[[${modal.extraDetails}]], [[${modal.link}]])" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+
+        </div>
+    </tr>
+    <div class="architecture-container" style="display:none">
+        <img class="architecture-img" src="./images/arch.jpeg">
+    </div>
+    <footer class="footer-distributed">
+        <div class="footer-left fade-footer">
+            <h3>Aviral<span>Aman</span></h3>
+            <p class="footer-links">
+                <a href="#">Web Application Developer</a>
+                ·
+                <a href="#">Java</a>
+                ·
+                <a href="#">Spring Boot</a>
+            </p>
+
+            <p class="footer-company-name">aviralaman25@gmail.com</p>
+            <div class="footer-icons">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <p>Contact Me</p>
+            <form id="message-form" onsubmit="saveMessage(event)">
+                <input id="email" for="email" type="text" name="email" placeholder="Email">
+                <textarea id="message" for="message" name="message" placeholder="Message"></textarea>
+                <button>Send</button>
+            </form>
+        </div>
+    </footer>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
+<script src="./scripts/modal.js"></script>
+<script src="./scripts/footer.js"></script>
+
+</html>
